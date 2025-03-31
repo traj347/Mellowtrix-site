@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mellowtrix - Upload & Stream Music</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #121212;
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background: #1e1e1e;
+            padding: 20px;
+            font-size: 24px;
+        }
+        .container {
+            padding: 20px;
+        }
+        .music-player, .upload-section {
+            margin-top: 20px;
+        }
+        .song {
+            margin: 10px 0;
+        }
+        footer {
+            background: #1e1e1e;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Mellowtrix - Upload & Stream Music</h1>
+    </header>
+    <div class="container">
+        <h2>Upload Your Songs & Share with the World</h2>
+        
+        <div class="upload-section">
+            <input type="file" id="fileInput" accept="audio/*">
+            <button onclick="uploadSong()">Upload Song</button>
+        </div>
+        
+        <h3>Available Songs</h3>
+        <div id="songList">
+            <!-- Songs will be listed here dynamically -->
+        </div>
+    </div>
+    <footer>
+        <p>&copy; 2025 Mellowtrix. All Rights Reserved.</p>
+    </footer>
+    
+    <script>
+        function uploadSong() {
+            const fileInput = document.getElementById('fileInput');
+            if (fileInput.files.length > 0) {
+                const file = fileInput.files[0];
+                const url = URL.createObjectURL(file);
+                
+                const songList = document.getElementById('songList');
+                const songDiv = document.createElement('div');
+                songDiv.className = 'song';
+                songDiv.innerHTML = `
+                    <p>${file.name}</p>
+                    <audio controls>
+                        <source src="${url}" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                    <br>
+                    <a href="${url}" download="${file.name}">Download</a>
+                `;
+                songList.appendChild(songDiv);
+            }
+        }
+    </script>
+</body>
+</html>
